@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'controllers/todo_controller.dart';
 import 'data/todo_repository.dart';
-import 'pages/todo_list_page.dart';
 import 'utils/notification_service.dart';
+import 'firebase_options.dart';
+import 'pages/auth/auth_gate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.instance.init();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final repository = TodoRepository();
   final controller = TodoController(repository);
   await controller.init();
@@ -59,7 +62,7 @@ class MyApp extends StatelessWidget {
           ),
           visualDensity: VisualDensity.standard,
         ),
-        home: const TodoListPage(),
+        home: const AuthGate(),
       ),
     );
   }

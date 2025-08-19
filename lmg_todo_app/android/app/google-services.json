@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "727023367544",
+    "project_id": "interview-todo-app-d8b6a",
+    "storage_bucket": "interview-todo-app-d8b6a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727023367544:android:3797957bcabb83b252448d",
+        "android_client_info": {
+          "package_name": "com.example.lmg_todo_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf4MuyRgs7lZyIDXpVNF_IKxqQTc8qsXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

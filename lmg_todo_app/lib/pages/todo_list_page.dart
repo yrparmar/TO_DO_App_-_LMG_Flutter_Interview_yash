@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../controllers/todo_controller.dart';
 import '../models/todo.dart';
@@ -44,6 +45,17 @@ class _TodoListPageState extends State<TodoListPage> {
                 ),
               ),
             ),
+            actions: [
+              IconButton(
+                tooltip: 'Sign out',
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                  } catch (_) {}
+                },
+                icon: const Icon(Icons.logout),
+              ),
+            ],
           ),
           body: Column(
             children: [
