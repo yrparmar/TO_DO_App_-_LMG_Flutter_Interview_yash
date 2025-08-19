@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 import 'controllers/todo_controller.dart';
 import 'data/todo_repository.dart';
 import 'pages/todo_list_page.dart';
+import 'utils/notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.instance.init();
   final repository = TodoRepository();
   final controller = TodoController(repository);
   await controller.init();
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
       value: controller,
       child: MaterialApp(
         title: 'LMG TODO',
+        scaffoldMessengerKey: NotificationService.instance.scaffoldMessengerKey,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,

@@ -28,34 +28,54 @@ class TodoDetailsPage extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 8),
                 _ProgressRing(todo: todo),
                 const SizedBox(height: 16),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(todo.title, style: Theme.of(context).textTheme.headlineSmall),
-                ),
-                const SizedBox(height: 8),
-                if (todo.description.isNotEmpty)
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      todo.description,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black87),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Title', style: Theme.of(context).textTheme.labelMedium?.copyWith(color: Colors.black54)),
+                        const SizedBox(height: 6),
+                        Text(
+                          todo.title,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 12),
+                        const Divider(height: 1),
+                        const SizedBox(height: 12),
+                        Text('Description', style: Theme.of(context).textTheme.labelMedium?.copyWith(color: Colors.black54)),
+                        const SizedBox(height: 6),
+                        Text(
+                          todo.description.isEmpty ? 'No description' : todo.description,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black87),
+                        ),
+                      ],
                     ),
                   ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.timer_outlined),
-                    const SizedBox(width: 8),
-                    Text('Remaining: ${formatMmSs(todo.remainingSeconds)}'),
-                  ],
                 ),
                 const SizedBox(height: 12),
-                _StatusChip(status: todo.status),
+                Center(
+                  child: Wrap(
+                    spacing: 12,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      _StatusChip(status: todo.status),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.timer_outlined),
+                          const SizedBox(width: 6),
+                          Text('Remaining: ${formatMmSs(todo.remainingSeconds)}'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 const Spacer(),
                 _Controls(todo: todo),
               ],

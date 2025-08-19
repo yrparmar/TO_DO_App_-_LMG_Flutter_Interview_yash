@@ -117,7 +117,18 @@ class _TodoListPageState extends State<TodoListPage> {
       context: context,
       isScrollControlled: true,
       builder: (context) => const TodoFormSheet(),
-    );
+    ).then((result) {
+      if (!mounted) return;
+      if (result == 'added') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Todo added successfully')),
+        );
+      } else if (result == 'updated') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Todo updated successfully')),
+        );
+      }
+    });
   }
 }
 

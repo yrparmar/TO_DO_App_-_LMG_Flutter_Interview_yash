@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../controllers/todo_controller.dart';
 import '../models/todo.dart';
+import '../utils/notification_service.dart';
 
 class TodoFormSheet extends StatefulWidget {
   const TodoFormSheet({super.key, this.existing});
@@ -167,10 +168,18 @@ class _TodoFormSheetState extends State<TodoFormSheet> {
     final desc = _descController.text.trim();
     if (widget.existing == null) {
       await ctrl.addTodo(title: title, description: desc, totalSeconds: total);
+      await NotificationService.instance.showSuccess(
+        title: 'Todo added',
+        body: '"$title" has been created successfully',
+      );
     } else {
       await ctrl.updateTodo(widget.existing!.id, title: title, description: desc, totalSeconds: total);
+      await NotificationService.instance.showSuccess(
+        title: 'Todo updated',
+        body: '"$title" has been updated successfully',
+      );
     }
-    if (mounted) Navigator.pop(context);
+    if (mounted) Navigator.pop(context, widget.existing == null ? 'added' : 'updated');
   }
 }
 
